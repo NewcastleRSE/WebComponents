@@ -73,7 +73,7 @@ ul {
 
 .holder .close { 
     font-family: monospace; font-size: 90%; color: blue; font-weight: bolder;
-    position: relative; left: 10em;
+    position: absolute; right: 3em;
 }
 
 .choices li button {
@@ -401,7 +401,11 @@ ul {
 
             // by default handle a keypress of 'enter' to simulate a click if any entry in 'results' exactly matches the current value of text
             if (ke.key.toLowerCase() == "enter") {
-                Array.from(this.find("ul.results li")).filter(e => e.textContent == ke.currentTarget.value).forEach(e => e.dispatchEvent(new Event("click")));
+                Array.from(this.findAll("ul.results li")).filter(e => e.textContent == ke.currentTarget.value).forEach(e => e.dispatchEvent(new MouseEvent('click', {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true
+                  })));
                 return;
             }
         })
